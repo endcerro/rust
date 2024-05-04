@@ -1,8 +1,28 @@
+//https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html
+//https://doc.rust-lang.org/book/ch04-03-slices.html
 use std::io;
 use rand::Rng;
 use std::cmp::Ordering;
+
+fn fibonnaci (n :u64, result: &u64) -> u64 {
+
+    if n <= 2 {
+        *result = 1;
+        return *result;
+    }
+    else {
+        *result = fibonnaci(n -1, result) + fibonnaci(n -2, result);
+        return *result;
+    }
+}
+
+
 fn main() {
+    let mut result : u64;
+    fibonnaci(42, &result);
+    println!("Number is {}",  result);
     println!("What's your name ?");
+    
     let mut name = String::new();
     io::stdin().read_line(&mut name).expect("No name !");
     // name = name.trim();
