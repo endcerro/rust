@@ -4,7 +4,7 @@ use std::io;
 use rand::Rng;
 use std::cmp::Ordering;
 
-fn fibonnaci (n :u64, result: &u64) -> u64 {
+fn fibonnaci (n :u64, result: &mut u64) -> u64 {
 
     if n <= 2 {
         *result = 1;
@@ -18,8 +18,8 @@ fn fibonnaci (n :u64, result: &u64) -> u64 {
 
 
 fn main() {
-    let mut result : u64;
-    fibonnaci(42, &result);
+    let mut result : u64 = 0;
+    fibonnaci(42, &mut result);
     println!("Number is {}",  result);
     println!("What's your name ?");
     
