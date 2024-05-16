@@ -38,25 +38,34 @@ enum Message {
 	Quit,
 	Move { x: i32, y: i32},
 	Write(String),
-	ChangeColor(i32,i32,i32)
-}	
+	ChangeColor(i32,i32,i32),
+	SomeRandomStuff
+}
 
 impl Message {
-	fn call(&self){
-
+	fn call(self : &Self){
+		match self
+		{
+			Message::ChangeColor(r,g ,b ) => println!("r {r}, g {g}, b {b}"),
+			Message::Move { x, y } => println!("x {x} y {y}"),
+			Message::Write(s) => println!("s {s}"),
+			Message::Quit => println!("quit"),
+			other => println!("Other stuffff"),
+			_ => (),
+		}
 	}
-	
+
 }
 
 fn main() {
-	// let width : u32 = 20;
-	// let height : u32 = 30;
+	let width : u32 = 20;
+	let height : u32 = 30;
 
 	// let tuple_rec = (30,50);
-	// let struct_rec = Rectangle {
-	// 	width : dbg!(10 * width),
-	// 	height : 10
-	// };
+	let struct_rec = Rectangle {
+		width : dbg!(10 * width),
+		height : 10
+	};
 	let rect1 = Rectangle {
         width: 30,
         height: 50,
@@ -75,7 +84,7 @@ fn main() {
 	// println!("The struct area is {}",struct_area(&struct_rec));
 	// println!("The struct  {:#?}",struct_rec);
 	// dbg!(&struct_rec);
-	// println!("The struct and its method  {}",struct_rec.area());
+	println!("The struct and its method  {}",struct_rec.area());
 
 	print!("rect1 can hold rect2 ? {}\n",rect1.can_hold(&rect2) );
 	print!("rect1 can hold rect3 ? {}\n", rect1.can_hold(&rect3));
@@ -87,6 +96,28 @@ fn main() {
 	let six : IpAddrKind = IpAddrKind::V6(String::from("::1"));
 
 	let m : Message = Message::Write(String::from("Hello world"));
+	let m2: Message = Message::Move { x: 2, y: 4 };
+	let m3: Message = Message::Quit;
+	let m4: Message = Message::ChangeColor(1, 2, 3);
+	let m5: Message = Message::SomeRandomStuff;
+	m.call();
+	m2.call();
+	m3.call();
+	m4.call();
+	m5.call();
+	let some_nbr: Option<i32> = Some(10);
+	let some_char: Option<char> = Some('a');
+	let mut none_nbr : Option<i32> = None;
+	// none_nbr = Some(10);
+
+	if let Some(x) = none_nbr {
+		println!("There is a value {x}");
+	}
+	else {
+		println!("There is no value");
+	}
+
+
 }
 
 fn route(ip_kind : IpAddrKind){
